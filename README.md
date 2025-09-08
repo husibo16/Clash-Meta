@@ -1,4 +1,6 @@
 
+订阅管理 https://github.com/gooaclok819/sublinkX
+
 订阅模版clash_bohan2.yaml
 1. 节点管理智能化
 
