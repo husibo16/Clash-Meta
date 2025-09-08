@@ -1,0 +1,396 @@
+socks-port: 7891
+redir-port: 7892
+tproxy-port: 7893
+mixed-port: 7890
+allow-lan: true
+mode: rule
+log-level: info
+ipv6: true
+
+# —— 通用优化 ——
+unified-delay: true
+tcp-concurrent: true
+
+# —— 配置档案 ——
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+# —— Geo 数据库自动更新 ——
+geo-auto-update: true
+geox-url:
+  geoip: https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat
+  geosite: https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat
+  mmdb: https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb
+
+# —— 嗅探 ——
+sniffer:
+  enable: true
+  sniff:
+    TLS:
+      ports: [443, 8443, 2053, 2083, 2087, 2096]
+    HTTP:
+      ports: [80, 8080-8081, 8880, 2052, 2082, 2086, 2095]
+      override-destination: true
+  force-domain:
+    - "+.netflix.com"
+    - "+.nflxvideo.net"
+    - "+.amazonvideo.com"
+    - "+.disneyplus.com"
+  skip-domain:
+    - "+.local"
+    - "+.lan"
+
+# —— DNS ——
+dns:
+  enable: true
+  cache: true
+  cache-algorithm: arc 
+  prefer-h3: true
+  listen: 0.0.0.0:53
+  ipv6: true
+  use-hosts: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  default-nameserver:
+    - 119.29.29.29
+    - 223.5.5.5
+  fake-ip-filter:
+    - '*.lan'
+    - '*.localdomain'
+    - '*.example'
+    - '*.invalid'
+    - '*.localhost'
+    - '*.test'
+    - '*.local'
+    - '*.home.arpa'
+    - 'time.*.com'
+    - 'time.*.gov'
+    - 'time.*.edu.cn'
+    - 'time.*.apple.com'
+    - 'time1.*.com'
+    - 'time2.*.com'
+    - 'time3.*.com'
+    - 'time4.*.com'
+    - 'time5.*.com'
+    - 'time6.*.com'
+    - 'time7.*.com'
+    - 'ntp.*.com'
+    - 'ntp1.*.com'
+    - 'ntp2.*.com'
+    - 'ntp3.*.com'
+    - 'ntp4.*.com'
+    - 'ntp5.*.com'
+    - 'ntp6.*.com'
+    - 'ntp7.*.com'
+    - '*.time.edu.cn'
+    - '*.ntp.org.cn'
+    - '+.pool.ntp.org'
+    - 'time1.cloud.tencent.com'
+    - 'music.163.com'
+    - '*.music.163.com'
+    - '*.126.net'
+    - 'musicapi.taihe.com'
+    - 'music.taihe.com'
+    - 'songsearch.kugou.com'
+    - 'trackercdn.kugou.com'
+    - '*.kuwo.cn'
+    - 'api-jooxtt.sanook.com'
+    - 'api.joox.com'
+    - 'joox.com'
+    - 'y.qq.com'
+    - '*.y.qq.com'
+    - 'streamoc.music.tc.qq.com'
+    - 'mobileoc.music.tc.qq.com'
+    - 'isure.stream.qqmusic.qq.com'
+    - 'dl.stream.qqmusic.qq.com'
+    - 'aqqmusic.tc.qq.com'
+    - 'amobile.music.tc.qq.com'
+    - '*.xiami.com'
+    - '*.music.migu.cn'
+    - 'music.migu.cn'
+    - '*.msftconnecttest.com'
+    - '*.msftncsi.com'
+    - 'msftconnecttest.com'
+    - 'msftncsi.com'
+    - 'localhost.ptlogin2.qq.com'
+    - 'localhost.sec.qq.com'
+    - '+.srv.nintendo.net'
+    - '+.stun.playstation.net'
+    - 'xbox.*.microsoft.com'
+    - 'xnotify.xboxlive.com'
+    - '+.battlenet.com.cn'
+    - '+.wotgame.cn'
+    - '+.wggames.cn'
+    - '+.wowsgame.cn'
+    - '+.wargaming.net'
+    - 'proxy.golang.org'
+    - 'stun.*.*'
+    - 'stun.*.*.*'
+    - '+.stun.*.*'
+    - '+.stun.*.*.*'
+    - '+.stun.*.*.*.*'
+    - 'heartbeat.belkin.com'
+    - '*.linksys.com'
+    - '*.linksyssmartwifi.com'
+    - '*.router.asus.com'
+    - 'mesu.apple.com'
+    - 'swscan.apple.com'
+    - 'swquery.apple.com'
+    - 'swdownload.apple.com'
+    - 'swcdn.apple.com'
+    - 'swdist.apple.com'
+    - 'lens.l.google.com'
+    - 'stun.l.google.com'
+    - '+.nflxvideo.net'
+    - '*.square-enix.com'
+    - '*.finalfantasyxiv.com'
+    - '*.ffxiv.com'
+    - '*.mcdn.bilivideo.cn'
+
+    - 'weixin.qq.com'
+    - 'wx.qq.com'
+    - 'wx2.qq.com'
+    - 'wxapp.qq.com'
+    - 'open.weixin.qq.com'
+    - 'res.wx.qq.com'
+    - 'res2.wx.qq.com'
+    - 'taobao.com'
+    - '*.taobao.com'
+    - 'tmall.com'
+    - '*.tmall.com'
+    - 'alicdn.com'
+    - '*.alicdn.com'
+    - 'alipay.com'
+    - '*.alipay.com'
+    - 'jd.com'
+    - '*.jd.com'
+    - 'jdcloud.com'
+    - '*.jdcloud.com'
+    - '360buyimg.com'
+    - '*.360buyimg.com'
+    - 'alipayobjects.com'
+    - '+.alipayobjects.com'
+    - 'jdstatic.com'
+    - '+.jdstatic.com'
+    - 'qq.com'
+    - '+.qq.com'
+  nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+    - 119.29.29.29
+    - 223.5.5.5
+  fallback:
+    - "https://dns.google/dns-query#🌐 国外流量"
+    - "https://cloudflare-dns.com/dns-query#🌐 国外流量"
+    - "8.8.8.8#🌐 国外流量"
+    - "1.1.1.1#🌐 国外流量"
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+      - 0.0.0.0/8
+      - 10.0.0.0/8
+      - 100.64.0.0/10
+      - 127.0.0.0/8
+      - 169.254.0.0/16
+      - 172.16.0.0/12
+      - 192.0.0.0/24
+      - 192.0.2.0/24
+      - 192.88.99.0/24
+      - 192.168.0.0/16
+      - 198.18.0.0/15
+      - 198.51.100.0/24
+      - 203.0.113.0/24
+      - 224.0.0.0/4
+      - 240.0.0.0/4
+      - 255.255.255.255/32
+    domain:
+      - +.google.com
+      - +.facebook.com
+      - +.youtube.com
+      - +.githubusercontent.com
+      - +.googlevideo.com
+  nameserver-policy:
+    "rule-set:Direct":
+      - https://doh.pub/dns-query
+      - https://dns.alidns.com/dns-query
+      - 119.29.29.29
+      - 223.5.5.5
+    "rule-set:ChinaMedia":
+      - https://doh.pub/dns-query
+      - https://dns.alidns.com/dns-query
+      - 119.29.29.29
+      - 223.5.5.5
+    "rule-set:China":
+      - https://doh.pub/dns-query
+      - https://dns.alidns.com/dns-query
+      - 119.29.29.29
+      - 223.5.5.5
+    "rule-set:Lan":
+      - system
+    "geosite:cn":
+      - https://doh.pub/dns-query
+      - https://dns.alidns.com/dns-query
+      - 119.29.29.29
+      - 223.5.5.5
+
+    "+.taobao.com": ["https://dns.alidns.com/dns-query", "223.5.5.5"]
+    "+.tmall.com":  ["https://dns.alidns.com/dns-query", "223.5.5.5"]
+    "+.alicdn.com": ["https://dns.alidns.com/dns-query", "223.5.5.5"]
+    "+.alipay.com": ["https://dns.alidns.com/dns-query", "223.5.5.5"]
+    "+.alipayobjects.com": ["https://dns.alidns.com/dns-query", "223.5.5.5"]
+
+    "+.jd.com": ["https://doh.pub/dns-query", "119.29.29.29"]
+    "+.jdcloud.com": ["https://doh.pub/dns-query", "119.29.29.29"]
+    "+.360buyimg.com": ["https://doh.pub/dns-query", "119.29.29.29"]
+    "+.jdstatic.com": ["https://doh.pub/dns-query", "119.29.29.29"]
+
+    "+.qq.com": ["https://doh.pub/dns-query", "119.29.29.29"]
+
+    "geosite:private":
+      - system
+    "rule-set:Global":
+      - "https://dns.google/dns-query#🌐 国外流量"
+      - "https://cloudflare-dns.com/dns-query#🌐 国外流量"
+    "rule-set:GlobalMedia":
+      - "https://dns.google/dns-query#🌐 国外流量"
+      - "https://cloudflare-dns.com/dns-query#🌐 国外流量"
+    "rule-set:Game":
+      - "https://dns.google/dns-query#🌐 国外流量"
+      - "https://cloudflare-dns.com/dns-query#🌐 国外流量"
+
+# —— 从机场订阅拉取节点（自动更新） ——
+proxy-providers:
+  youtu:
+    type: http
+    url: "YOUR_SUBSCRIPTION_URL"   # ← 改成你的机场订阅链接
+    interval: 86400
+    path: ./providers/youtu.yaml
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 600
+
+# —— 代理分组 ——
+proxy-groups:
+  - name: "🌐 国外流量"
+    type: select
+    proxies:
+      - "♻️ 自动选择"
+      - "🔁 故障转移"
+      - "🧪 手动选择"
+
+  - name: "♻️ 自动选择"
+    type: url-test
+    use:
+      - youtu
+    url: http://www.gstatic.com/generate_204
+    interval: 600
+
+  - name: "🔁 故障转移"
+    type: fallback
+    use:
+      - youtu
+    url: http://www.gstatic.com/generate_204
+    interval: 600
+
+  - name: "🧪 手动选择"
+    type: select
+    use:
+      - youtu
+
+  - name: "🎬 国际流媒体"
+    type: select
+    proxies:
+      - "♻️ 自动选择"
+      - "🔁 故障转移"
+      - "🧪 手动选择"
+
+  - name: "🎮 游戏平台"
+    type: select
+    proxies:
+      - "♻️ 自动选择"
+      - "🔁 故障转移"
+      - "🧪 手动选择"
+
+  - name: "🏠 大陆流量"
+    type: select
+    proxies:
+      - "DIRECT"
+      - "🌐 国外流量"
+
+  - name: "➡️ 直接连接"
+    type: select
+    proxies:
+      - "DIRECT"
+
+# —— 规则集（自动更新） ——
+rule-providers:
+  Direct:
+    type: http
+    behavior: classical
+    path: ./RuleSet/Direct.yaml
+    url: https://resource.touhou.center/ios_rule_script/rule/Clash/Direct/Direct.yaml
+    interval: 86400
+  GlobalMedia:
+    type: http
+    behavior: classical
+    path: ./RuleSet/GlobalMedia.yaml
+    url: https://resource.touhou.center/ios_rule_script/rule/Clash/GlobalMedia/GlobalMedia_Classical.yaml
+    interval: 86400
+  AsianMedia:
+    type: http
+    behavior: classical
+    path: ./RuleSet/AsianMedia.yaml
+    url: https://resource.touhou.center/ios_rule_script/rule/Clash/AsianMedia/AsianMedia.yaml
+    interval: 86400
+  Game:
+    type: http
+    behavior: classical
+    path: ./RuleSet/Game.yaml
+    url: https://resource.touhou.center/ios_rule_script/rule/Clash/Game/Game.yaml
+    interval: 86400
+  Global:
+    type: http
+    behavior: classical
+    path: ./RuleSet/Global.yaml
+    url: https://resource.touhou.center/ios_rule_script/rule/Clash/Global/Global_Classical.yaml
+    interval: 86400
+  ChinaMedia:
+    type: http
+    behavior: classical
+    path: ./RuleSet/ChinaMedia.yaml
+    url: https://resource.touhou.center/ios_rule_script/rule/Clash/ChinaMedia/ChinaMedia.yaml
+    interval: 86400
+  China:
+    type: http
+    behavior: classical
+    path: ./RuleSet/China.yaml
+    url: https://resource.touhou.center/ios_rule_script/rule/Clash/China/China_Classical.yaml
+    interval: 86400
+  Lan:
+    type: http
+    behavior: classical
+    path: ./RuleSet/Lan.yaml
+    url: https://resource.touhou.center/ios_rule_script/rule/Clash/Lan/Lan.yaml
+    interval: 86400
+  ChinaIPs:
+    type: http
+    behavior: classical
+    path: ./RuleSet/ChinaIPs.yaml
+    url: https://resource.touhou.center/ios_rule_script/rule/Clash/ChinaIPs/ChinaIPs_Classical.yaml
+    interval: 86400
+
+# —— 分流规则 ——
+rules:
+  - RULE-SET,Direct,DIRECT
+  - RULE-SET,GlobalMedia,🎬 国际流媒体
+  - RULE-SET,AsianMedia,🎬 国际流媒体
+  - RULE-SET,Game,🎮 游戏平台
+  - RULE-SET,Global,🌐 国外流量
+  - RULE-SET,ChinaMedia,🏠 大陆流量
+  - RULE-SET,China,🏠 大陆流量
+  - RULE-SET,Lan,➡️ 直接连接
+  - RULE-SET,ChinaIPs,🏠 大陆流量
+  - MATCH,🌐 国外流量
