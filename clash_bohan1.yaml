@@ -1,6 +1,3 @@
-socks-port: 7891
-redir-port: 7892
-tproxy-port: 7893
 mixed-port: 7890
 allow-lan: true
 mode: rule
@@ -28,7 +25,7 @@ sniffer:
   enable: true
   sniff:
     TLS:
-      ports: [443, 8443, 2053, 2083, 2087, 2096]
+      ports: [443, 8443]
     HTTP:
       ports: [80, 8080-8081, 8880, 2052, 2082, 2086, 2095]
       override-destination: true
@@ -44,10 +41,8 @@ sniffer:
 # —— DNS ——
 dns:
   enable: true
-  cache: true
-  cache-algorithm: arc 
   prefer-h3: true
-  listen: 0.0.0.0:53
+  listen: 0.0.0.0:1053
   ipv6: true
   use-hosts: true
   enhanced-mode: fake-ip
@@ -147,34 +142,6 @@ dns:
     - '*.finalfantasyxiv.com'
     - '*.ffxiv.com'
     - '*.mcdn.bilivideo.cn'
-
-    - 'weixin.qq.com'
-    - 'wx.qq.com'
-    - 'wx2.qq.com'
-    - 'wxapp.qq.com'
-    - 'open.weixin.qq.com'
-    - 'res.wx.qq.com'
-    - 'res2.wx.qq.com'
-    - 'taobao.com'
-    - '*.taobao.com'
-    - 'tmall.com'
-    - '*.tmall.com'
-    - 'alicdn.com'
-    - '*.alicdn.com'
-    - 'alipay.com'
-    - '*.alipay.com'
-    - 'jd.com'
-    - '*.jd.com'
-    - 'jdcloud.com'
-    - '*.jdcloud.com'
-    - '360buyimg.com'
-    - '*.360buyimg.com'
-    - 'alipayobjects.com'
-    - '+.alipayobjects.com'
-    - 'jdstatic.com'
-    - '+.jdstatic.com'
-    - 'qq.com'
-    - '+.qq.com'
   nameserver:
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
@@ -234,31 +201,8 @@ dns:
       - https://dns.alidns.com/dns-query
       - 119.29.29.29
       - 223.5.5.5
-
-    "+.taobao.com": ["https://dns.alidns.com/dns-query", "223.5.5.5"]
-    "+.tmall.com":  ["https://dns.alidns.com/dns-query", "223.5.5.5"]
-    "+.alicdn.com": ["https://dns.alidns.com/dns-query", "223.5.5.5"]
-    "+.alipay.com": ["https://dns.alidns.com/dns-query", "223.5.5.5"]
-    "+.alipayobjects.com": ["https://dns.alidns.com/dns-query", "223.5.5.5"]
-
-    "+.jd.com": ["https://doh.pub/dns-query", "119.29.29.29"]
-    "+.jdcloud.com": ["https://doh.pub/dns-query", "119.29.29.29"]
-    "+.360buyimg.com": ["https://doh.pub/dns-query", "119.29.29.29"]
-    "+.jdstatic.com": ["https://doh.pub/dns-query", "119.29.29.29"]
-
-    "+.qq.com": ["https://doh.pub/dns-query", "119.29.29.29"]
-
     "geosite:private":
       - system
-    "rule-set:Global":
-      - "https://dns.google/dns-query#🌐 国外流量"
-      - "https://cloudflare-dns.com/dns-query#🌐 国外流量"
-    "rule-set:GlobalMedia":
-      - "https://dns.google/dns-query#🌐 国外流量"
-      - "https://cloudflare-dns.com/dns-query#🌐 国外流量"
-    "rule-set:Game":
-      - "https://dns.google/dns-query#🌐 国外流量"
-      - "https://cloudflare-dns.com/dns-query#🌐 国外流量"
 
 # —— 从机场订阅拉取节点（自动更新） ——
 proxy-providers:
