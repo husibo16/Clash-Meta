@@ -272,7 +272,7 @@ dns:
 proxy-providers:
   youtu:
     type: http
-    url: "YOUR_SUBSCRIPTION_URL"   # ← 改成你的机场订阅链接
+    url: 
     interval: 86400
     path: ./providers/youtu.yaml
     health-check:
