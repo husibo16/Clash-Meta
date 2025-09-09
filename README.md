@@ -87,7 +87,7 @@
 
 ## 🚀 使用方法
 
-1. **下载配置**
+1. **订阅部署下载配置**
    ```bash
    git clone https://github.com/gooaclok819/sublinkX.git
    cd sublinkX
